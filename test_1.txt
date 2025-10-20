@@ -1,0 +1,10 @@
+# Resultados `test_1`
+
+Al finalizar la ejecucion del proyecto se obtuvieron 100 muestras, las cuales
+mediante un script de octave se obtuvo la media y el desvio estandar,
+resultando:
+
+```
+Media = 2541.030
+Desvío estándar = 58.698
+```
