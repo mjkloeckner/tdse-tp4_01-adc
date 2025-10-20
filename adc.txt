@@ -1,0 +1,54 @@
+# Configuración ADC1
+
+La configuración del ADC utilizada se puede ver en el archivo `Core/main.c`, en
+particular en la definición de la función `MX_ADC1_Init`, esta función es
+invocada antes de iniciar el superloop en la función `main`, al momento de
+inicializar los periféricos.
+
+La función `MX_ADC1_Init` es auto-generada por la aplicación STM32CubeMX,
+removiendo comentarios utilizados por la aplicación resulta como se muestra a
+continuación:
+
+```c
+static void MX_ADC1_Init(void)
+{
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  // Common config
+  hadc1.Instance = ADC1;
+  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 1;
+  HAL_ADC_Init(&hadc1);
+
+  // Configure Regular Channel
+  sConfig.Channel = ADC_CHANNEL_0;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+}
+```
+
+Se puede ver que se utiliza solo uno de los conversores A/D del microcontrolador
+`ADC1`, y la configuración se guarda en un handle, que se define globalmente
+`hadc1`. El `ADC1` se configura en modo normal, es decir sin modo escaneo, ya
+que se lee un solo canal, por lo tanto no es necesario leer multiples canales
+secuencialmente. Y también se desactivan el modo de conversión continua y
+discontinúa, el primero indica que el ADC se detenga al finalizar cada
+conversión, el segundo se utiliza cuando se leen muchos canales secuencialmente
+(por ejemplo en modo escaneo) y hace que el ADC divida los canales en grupos, de
+manera de leer secuencialmente los grupos en cada conversion. Ademas se utiliza
+un trigger por software, es decir, no por interrupciones externas o
+temporizadores, y los bytes leídos se alinean a la derecha.
+
+Para la configuración especifica del canal, se indica al ADC que se utilizará el
+canal 0, el cual corresponde con el pin `PA0` de la placa NUCLEO-F103RB
+utilizada, el rango `sConfig.Rank` se utiliza para definir la prioridad de la
+lectura cuando se leen multiples canales, en este caso como solo se lee un canal
+no tiene mucha relevancia. Por ultimo se configura el período de muestreo del
+canal con `sConfig.SamplingTime`, en `ADC_SAMPLETIME_1CYCLE_5`, esto es 1.5
+ciclos del reloj del ADC, el período de muestreo máximo disponible para el ADC
+con la configuración de reloj de CPU utilizada.
