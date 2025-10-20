@@ -1,0 +1,13 @@
+# Resultados `test_3`
+
+Al finalizar la ejecucion del proyecto se obtuvieron 100 muestras
+(`test_3_out.txt`) las cuales mediante un script de octave
+(`test_analysis_script.m`) se obtuvo la media y el desvio estandar, resultando:
+
+```
+Media = 2410.25
+Desvío estándar = 49.09
+```
+
+En este caso es peor al resultado obtenido en la segunda prueba `test_2` pero
+mejor en al resultado obtenido en la primer prueba.

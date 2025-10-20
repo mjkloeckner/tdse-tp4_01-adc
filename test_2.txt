@@ -1,0 +1,13 @@
+# Resultados `test_2`
+
+Al finalizar la ejecución del proyecto se obtuvieron 100 muestras
+(`test_2_out.txt`) las cuales mediante un script de octave
+(`test_analysis_script.m`) se obtuvo la media y el desvió estándar, resultando:
+
+```
+Media = 2431.78
+Desvío estándar = 6.16
+```
+
+Este resultado es mejor en comparación al resultado de `test_1`, ya que el
+desvió estándar es menor, indicando una menor fluctuación entre muestras.

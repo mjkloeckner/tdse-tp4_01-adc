@@ -1,8 +1,8 @@
 # Resultados `test_1`
 
 Al finalizar la ejecucion del proyecto se obtuvieron 100 muestras
-(`test_1_out.txt`) las cuales mediante un script de octave (`test_1_script.m`)
-se obtuvo la media y el desvio estandar, resultando:
+(`test_1_out.txt`) las cuales mediante un script de octave
+(`test_analysis_script.m`) se obtuvo la media y el desvio estandar, resultando:
 
 ```
 Media = 2541.030
